@@ -263,7 +263,7 @@ export const weeks: WeekData[] = [
       { type: 'pdf', label: 'XGBOOST Notes', pdf: 'XGBOOST' },
       { type: 'link', label: 'XGBOOST Implementation', url: 'https://colab.research.google.com/drive/1cKyAPZfRCgD-roRdWx_1yUvQ33IF_q5N' },
       { type: 'link', label: 'XGBOOST Assignment', url: 'https://colab.research.google.com/drive/1GjThkHRxqkgPuRLTYm-DZS5GQAkoxJO0' },
-      { type: 'link', label: 'FastAPI', url: 'https://github.com/Nitingarg01/Fast_api' },
+      { type: 'link', label: 'FastAPI', url: 'https://github.com/nirmitrampal/Fast_api' },
     ],
   },
   {

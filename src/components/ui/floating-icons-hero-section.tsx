@@ -9,12 +9,19 @@ interface IconProps {
   className: string
 }
 
+export interface StatItem {
+  value: string
+  label: string
+}
+
 export interface FloatingIconsHeroProps {
   title: string
   subtitle: string
   ctaText: string
   ctaHref: string
   icons: IconProps[]
+  byline?: string
+  stats?: StatItem[]
 }
 
 const Icon = ({
@@ -100,7 +107,7 @@ const Icon = ({
 const FloatingIconsHero = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & FloatingIconsHeroProps
->(({ className, title, subtitle, ctaText, ctaHref, icons, ...props }, ref) => {
+>(({ className, title, subtitle, ctaText, ctaHref, icons, byline, stats, ...props }, ref) => {
   const mouseX = React.useRef(0)
   const mouseY = React.useRef(0)
 
@@ -131,21 +138,64 @@ const FloatingIconsHero = React.forwardRef<
         ))}
       </div>
 
-      <div className="relative z-10 text-center px-4 max-w-3xl">
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-gradient-to-b from-foreground to-foreground/70 text-transparent bg-clip-text text-balance">
-          {title}
-        </h1>
-        <p className="mt-6 max-w-xl mx-auto text-lg text-muted-foreground text-balance">
-          {subtitle}
-        </p>
-        <p className="mt-2 text-base text-muted-foreground/70 text-balance">
-          Nitin Garg &middot; 2203518
-        </p>
-        <div className="mt-10">
-          <Button asChild size="lg" className="px-8 py-6 text-base font-semibold">
-            <a href={ctaHref}>{ctaText}</a>
-          </Button>
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 grid lg:grid-cols-[1.35fr_1fr] gap-10 lg:gap-16 items-center">
+        <div className="text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card/60 backdrop-blur text-xs font-medium tracking-widest uppercase text-muted-foreground mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            Training Report &middot; 2026
+          </div>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] bg-gradient-to-br from-foreground via-foreground to-foreground/60 text-transparent bg-clip-text text-balance">
+            {title}
+          </h1>
+          <p className="mt-6 max-w-xl text-lg text-muted-foreground text-balance">
+            {subtitle}
+          </p>
+          {byline && (
+            <p className="mt-4 text-sm font-medium text-muted-foreground/80 text-balance">
+              {byline}
+            </p>
+          )}
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <Button asChild size="lg" className="px-8 py-6 text-base font-semibold">
+              <a href={ctaHref}>{ctaText}</a>
+            </Button>
+            <span className="text-xs text-muted-foreground/70">
+              Scroll &darr; to explore
+            </span>
+          </div>
         </div>
+
+        {stats && stats.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            className="relative"
+          >
+            <div className="grid grid-cols-2 gap-3">
+              {stats.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.4,
+                    delay: 0.35 + i * 0.08,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="rounded-2xl border border-border bg-card/70 backdrop-blur-md p-4 md:p-5"
+                >
+                  <div className="text-3xl md:text-4xl font-bold tracking-tight tabular-nums">
+                    {s.value}
+                  </div>
+                  <div className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">
+                    {s.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
       </div>
     </section>
   )

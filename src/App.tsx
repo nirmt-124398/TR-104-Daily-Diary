@@ -63,7 +63,7 @@ function App() {
         ctaText="Explore the Journey"
         ctaHref="#weeks"
         icons={heroIcons}
-        byline="Nirmit Rampal &middot; ID 2302729 &middot; GNDEC Ludhiana"
+        byline="Nirmit Rampal &middot; U.R.N: 2302729 &middot; GNDEC Ludhiana"
         stats={stats}
       />
 
@@ -139,7 +139,7 @@ function App() {
               Guru Nanak Dev Engineering College, Ludhiana
             </p>
             <p className="text-sm text-muted-foreground mt-1">
-              University Roll: 2302729
+              U.R.N: 2302729
             </p>
           </div>
           <div>
